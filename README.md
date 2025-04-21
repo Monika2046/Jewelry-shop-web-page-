@@ -53,7 +53,7 @@ Newsletter Pop-up: Create a pop-up or banner to promote newsletter sign-ups for 
 
 📸 Preview
 
-visit the website :
+visit the website :http://127.0.0.1:3000/index.html
 
 👩‍💻 Author
 
