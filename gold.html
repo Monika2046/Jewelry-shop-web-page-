@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Zyrella Gold Collection</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Georgia', serif;
+      background-color: #fdf6e3;
+      color: #4b3621;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      width: 250px;
+      background-color: #f4e1b8;
+      padding: 40px 20px;
+      box-shadow: 4px 0 10px rgba(0,0,0,0.1);
+      border-right: 2px solid #d9c295;
+    }
+
+    .sidebar h2 {
+      font-size: 1.8rem;
+      margin-bottom: 30px;
+      color: #b79342;
+      text-align: center;
+      border-bottom: 1px solid #c5a873;
+      padding-bottom: 10px;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .sidebar ul li {
+      padding: 12px 10px;
+      margin-bottom: 10px;
+      font-size: 1.1rem;
+      border-radius: 8px;
+      transition: background 0.3s ease;
+      cursor: pointer;
+    }
+
+    .sidebar ul li:hover {
+      background-color: #ecd9aa;
+      color: #8c6c2e;
+    }
+
+    .main-content {
+      flex-grow: 1;
+      padding: 40px;
+    }
+
+    .main-content h1 {
+      font-size: 2.8rem;
+      color: #bfa14b;
+      text-align: center;
+      margin-bottom: 40px;
+      text-shadow: 1px 1px 1px #e0c57c;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+
+    .item-card {
+      background: #fff9eb;
+      border-radius: 14px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      padding: 15px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .item-card:hover {
+      transform: scale(1.03);
+    }
+
+    .item-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 2px solid #dec78c;
+    }
+
+    .item-card h3 {
+      margin-top: 15px;
+      font-size: 1.3rem;
+      color: #7b5e2e;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="sidebar">
+    <h2>Categories</h2>
+    <ul>
+      <li onclick="loadCategory('necklaces')">Necklaces</li>
+      <li onclick="loadCategory('rings')">Rings</li>
+      <li onclick="loadCategory('bangles')">Bangles</li>
+      <li onclick="loadCategory('earrings')">Earrings</li>
+      <li onclick="loadCategory('pendants')">Pendants</li>
+      <li onclick="loadCategory('anklets')">Anklets</li>
+    </ul>
+  </div>
+
+  <div class="main-content">
+    <h1 id="category-title">Zyrella Gold Collection</h1>
+    <div class="gallery" id="gallery"></div>
+  </div>
+  <script>
+    const imageData = {
+      necklaces: [
+        "https://i.pinimg.com/736x/16/cd/2e/16cd2e2b6698919127a5a78eade7fd4a.jpg",
+        "https://i.pinimg.com/736x/96/bd/2f/96bd2f2699831b66c4a3d241bb8f0a89.jpg",
+        "https://i.pinimg.com/736x/7a/6c/68/7a6c683c4df598694780d2ce6d12c0e6.jpg",
+        "https://i.pinimg.com/736x/77/66/73/7766733633e592044c3399291b43bc07.jpg",
+        "https://i.pinimg.com/474x/16/bf/40/16bf40eb081516a0a42bd7ed70a7c646.jpg",
+        "https://i.pinimg.com/736x/d4/fd/39/d4fd39f9c3cc019ebbb0467b999ac2f7.jpg",
+        "https://i.pinimg.com/736x/eb/63/e8/eb63e8d7d907bbe60ff684874ab3e44f.jpg",
+        "https://i.pinimg.com/736x/ee/00/f4/ee00f48734c25c85d5a08b9a3e50bd27.jpg",
+        "https://i.pinimg.com/474x/fc/c9/cd/fcc9cd8b14ec980e5a9c1f0cad1fe511.jpg",
+        "https://i.pinimg.com/474x/7d/6a/9a/7d6a9aa0f552d13155fc97acf9b4f6cb.jpg",
+        "https://i.pinimg.com/736x/63/b9/d7/63b9d758ce4cf41baae05dd94584bb4e.jpg",
+        "https://i.pinimg.com/736x/92/96/be/9296be8061687ce76f8559d07834cdcb.jpg",
+        "https://i.pinimg.com/736x/95/f8/dd/95f8dd60779f1777a36a3a402dfac9e4.jpg",
+        "https://i.pinimg.com/474x/bf/08/f2/bf08f26cd99db57e9b5964e7eeac8239.jpg",
+        "https://i.pinimg.com/474x/c6/f4/cb/c6f4cbc8861801d183d4566f779bcf8f.jpg",
+        "https://i.pinimg.com/474x/d6/e0/19/d6e019e18e5771db954eda0181eeebd8.jpg"
+      ],
+      rings: [
+        "https://i.pinimg.com/736x/0a/cb/7b/0acb7bd4abf6deec76e6e90efb238319.jpg",
+        "https://i.pinimg.com/736x/1b/6f/11/1b6f114bc1fbfd5c6dd52e191eaac98b.jpg",
+        "https://i.pinimg.com/474x/a7/45/87/a745878cb30517b6893084df0d65d72e.jpg",
+        "https://i.pinimg.com/474x/b5/0a/c8/b50ac8dd86fcbaf91cd0619b070fb185.jpg",
+        "https://i.pinimg.com/474x/91/c5/c3/91c5c3243a32c787cd6e9ad6ecdbfdae.jpg",
+        "https://i.pinimg.com/474x/91/0d/91/910d9118427de55d4dd03bb52e97f061.jpg",
+        "https://i.pinimg.com/474x/f1/67/2e/f1672ea68ee906a34d2e37b408b0bb00.jpg",
+        "https://i.pinimg.com/474x/17/2b/73/172b73665570940829fa05f5cb379333.jpg",
+        "https://i.pinimg.com/474x/2b/d0/eb/2bd0eb6104211ba7d17f725485d9e247.jpg",
+        "https://i.pinimg.com/474x/7b/ff/a5/7bffa5d0e4d5fcfaee1d1e067c4598af.jpg",
+        "https://i.pinimg.com/474x/13/c7/bc/13c7bcff461bdd3fe966aad9ce02be10.jpg",
+        "https://i.pinimg.com/474x/20/0d/b5/200db5f73477a4b98a2cc547627056ae.jpg",
+        "https://i.pinimg.com/474x/77/91/51/779151eca9afb7cb1f3e17f71e90e375.jpg",
+        "https://i.pinimg.com/474x/d9/64/0f/d9640f5b0bff51079b31da015484c407.jpg",
+        "https://i.pinimg.com/474x/aa/41/a6/aa41a6807ae41e156c503231d9bc1530.jpg",
+        "https://i.pinimg.com/736x/70/96/5c/70965c81be426864834e98c7b38c810a.jpg"
+      ],
+      bangles: [
+        "https://i.pinimg.com/474x/11/82/fa/1182fa5e7e9827d208ec3344fbae7ab5.jpg",
+        "https://i.pinimg.com/736x/75/2e/17/752e17641f361d179508838b2a35bd4e.jpg",
+        "https://i.pinimg.com/474x/88/61/9a/88619a17960ca83ea7198cf59ddc8396.jpg",
+        "https://i.pinimg.com/474x/5e/46/6a/5e466ac50070efac779891cd4ce03799.jpg",
+        "https://i.pinimg.com/736x/21/3c/66/213c667a318e166581b9e211ed99301a.jpg",
+        "https://i.pinimg.com/474x/9f/b8/1f/9fb81f2b94644517e6c72e141ee53305.jpg",
+        "https://i.pinimg.com/474x/45/75/29/457529cd22e21bd480e4d01036329a1d.jpg",
+        "https://i.pinimg.com/474x/7a/59/48/7a5948dfd8b0559b36f8071b630a53a7.jpg",
+        "https://i.pinimg.com/474x/e2/b3/46/e2b346ae8eee155a382c8fbdeca2e89e.jpg",
+        "https://i.pinimg.com/474x/b5/1a/9e/b51a9eba17e03958f08c9dbccc022646.jpg",
+        "https://i.pinimg.com/474x/f5/25/c9/f525c9584e77918d3368fed7dece89b6.jpg",
+        "https://i.pinimg.com/474x/9b/83/48/9b8348fe44133f50a2a014a485d6506f.jpg",
+        "https://i.pinimg.com/474x/04/26/66/0426664dd294036e1ca456db1df1acef.jpg",
+        "https://i.pinimg.com/474x/49/f5/e9/49f5e9a1213b2bad0254a5116a2b876d.jpg",
+        "https://i.pinimg.com/474x/72/98/47/72984789e485692d5f78ad27f7881d56.jpg",
+        "https://i.pinimg.com/474x/a1/8e/95/a18e951921e19ef068de92bafa5c2ca2.jpg"
+       
+      ],
+      earrings: [
+        "https://i.pinimg.com/474x/29/19/f7/2919f7f4760badee6b15a4b822b7deb4.jpg",
+        "https://i.pinimg.com/474x/0c/62/80/0c62801311c4fef2fce97f941115fc28.jpg",
+        "https://i.pinimg.com/736x/3e/57/4e/3e574e8496931717617a0164f0801405.jpg",
+        "https://i.pinimg.com/736x/78/f8/3e/78f83eff2af6fa9cd734962b14717d46.jpg",
+        "https://i.pinimg.com/736x/68/e8/55/68e855ec097c222c1c48d713c8914071.jpg",
+        "https://i.pinimg.com/474x/3c/4e/04/3c4e04cd9b69e2214d16ed00aa7e44ae.jpg",
+        "https://i.pinimg.com/736x/24/17/c2/2417c2c497367be5ceb097ef7b690ba5.jpg",
+        "https://i.pinimg.com/736x/e2/a7/96/e2a796a6e505208f0e88e7218729ba72.jpg",
+        "https://i.pinimg.com/474x/3c/ff/ad/3cffad25440108a71990e706964a0727.jpg",
+        "https://i.pinimg.com/736x/73/69/ea/7369eac48f78329d9eed7c83111a0408.jpg",
+        "https://i.pinimg.com/474x/a2/a7/ba/a2a7bafee1459d4dd9582d8e9e3ebb1d.jpg",
+        "https://i.pinimg.com/474x/33/fd/23/33fd23f02d7fe223c652fabdc427413c.jpg",
+        "https://i.pinimg.com/474x/a7/4e/4a/a74e4abb020ca93f4b58a6cb44616b05.jpg",
+        "https://i.pinimg.com/474x/f0/ef/30/f0ef30316232e4ca471d00996f7716be.jpg",
+        "https://i.pinimg.com/474x/4c/8d/c8/4c8dc8a970fade5544651cb50d306889.jpg",
+        "https://i.pinimg.com/474x/a9/0f/d7/a90fd78cc1e64b2786414a527ad88576.jpg"
+
+        
+      ],
+      pendants: [
+        "https://i.pinimg.com/474x/ee/31/f2/ee31f24bd0315eff17092e2c15e7ac23.jpg",
+        "https://i.pinimg.com/474x/55/1f/6a/551f6a99bcc72e18c70879b00e959e2c.jpg",
+        "https://i.pinimg.com/474x/29/ad/71/29ad71f1a86e439a3f49b99b02b114b5.jpg",
+        "https://i.pinimg.com/474x/e5/95/99/e59599b7153e519ff592446ccd0e7d02.jpg",
+        "https://i.pinimg.com/474x/94/4f/47/944f47847d2dea9c28c81cc6f96dad4b.jpg",
+        "https://i.pinimg.com/474x/3f/83/c7/3f83c7b1bb6a8058ad286d72d9c8d4f4.jpg",
+        "https://i.pinimg.com/474x/c0/30/48/c03048e38ea61325edac81ff053da190.jpg",
+        "https://i.pinimg.com/736x/c2/1e/6b/c21e6b82e7c572c940434599d34e0fb1.jpg",
+        "https://i.pinimg.com/474x/de/75/24/de75242c526df15ab18730b6ef10e343.jpg",
+        "https://i.pinimg.com/474x/ab/4d/c6/ab4dc6a08c04a4b0279c9d182bc4d0c3.jpg",
+        "https://i.pinimg.com/474x/fc/90/40/fc90401c31fa30da830293d82582ad39.jpg",
+        "https://i.pinimg.com/474x/9f/0a/b8/9f0ab85e2a15f83a483d076314cfd974.jpg",
+        "https://i.pinimg.com/474x/6a/cc/c9/6accc9b7b15e56b225d15c7252c914fa.jpg",
+        "https://i.pinimg.com/474x/80/8b/ba/808bbac9e166b363b9ea60caa89c3d28.jpg",
+        "https://i.pinimg.com/474x/bd/f0/69/bdf069dcf9675f357335a5a30656ddba.jpg",
+        "https://i.pinimg.com/474x/37/cb/c5/37cbc5abec734b28df5b8dac3b2a6469.jpg"
+        
+      ],
+      anklets: [
+        "https://i.pinimg.com/736x/4f/fa/20/4ffa20fb0e011f40e17ca410f08c42a5.jpg",
+        "https://i.pinimg.com/474x/3d/ee/50/3dee50ba8ba4de0c18082a77a08ddb7c.jpg",
+        "https://i.pinimg.com/474x/18/0a/57/180a5762462b1842ac3dd7ebc6aa68b9.jpg",
+        "https://i.pinimg.com/474x/13/55/af/1355af5ec86e3179b89f847c9b00d850.jpg",
+        "https://i.pinimg.com/474x/70/40/33/704033eb4bcee236a11618f54644b56e.jpg",
+        "https://i.pinimg.com/474x/a4/a4/8f/a4a48f86d93711b367c826420b8f100a.jpg",
+        "https://i.pinimg.com/474x/97/7d/4d/977d4d7c2ceb2849e247e7d4a93b316c.jpg",
+        "https://i.pinimg.com/474x/6b/53/ad/6b53ad8fc0d23b4b533ff5e1a744936e.jpg",
+        "https://i.pinimg.com/736x/79/fb/d5/79fbd5824aadb8f523710b97db5f7566.jpg",
+        "https://i.pinimg.com/474x/22/47/80/224780cd73b5b1bb274b1ceb56750687.jpg",
+        "https://i.pinimg.com/474x/db/6e/a9/db6ea9a2a96a0a1eeaa67b8baa04e489.jpg",
+        "https://i.pinimg.com/474x/25/8e/c0/258ec0b6265bad53990c303b8b3589a7.jpg",
+        "https://i.pinimg.com/474x/8c/9e/7f/8c9e7f69eee5698f5417ea7017c42de4.jpg",
+        "https://i.pinimg.com/474x/15/09/6c/15096c2cd85470f3c894c253c45dc62d.jpg",
+        "https://i.pinimg.com/474x/7e/1d/d7/7e1dd7ccd16482899f2a736c89743899.jpg",
+        "https://i.pinimg.com/474x/4a/11/1d/4a111d0d00970dbbf9367805bac8feec.jpg"
+      ]
+    };
+
+
+
+    function loadCategory(category) {
+      const gallery = document.getElementById("gallery");
+      const title = document.getElementById("category-title");
+      title.innerText = `Zyrella Gold Collection - ${category.charAt(0).toUpperCase() + category.slice(1)}`;
+      gallery.innerHTML = "";
+
+      imageData[category].forEach((url, index) => {
+        const card = document.createElement("div");
+        card.className = "item-card";
+        card.innerHTML = `<img src="${url}" alt="${category} ${index + 1}"><h3>${category.charAt(0).toUpperCase() + category.slice(1)} ${index + 1}</h3>`;
+        gallery.appendChild(card);
+      });
+    }
+
+    // Load default category
+    loadCategory("necklaces");
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+

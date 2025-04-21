@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zyrella Jewellery</title>
+  <style>
+    /* General Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, #fff1f9, #f3e6ff);
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      padding-top: 60px;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(to right, #5e2a84, #b56be4);
+      color: white;
+      padding: 15px 20px;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo-container h1 {
+      font-size: 24px;
+      margin-left: 20px;
+    }
+
+    .nav-menu a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-size: 16px;
+      transition: color 0.3s, transform 0.3s;
+    }
+
+    .nav-menu a:hover {
+      color: #f7edff;
+      transform: scale(1.1);
+    }
+
+    /* Search Bar */
+    .search-bar input {
+      padding: 8px 15px;
+      border-radius: 25px;
+      border: 1px solid #b56be4;
+      width: 250px;
+      transition: transform 0.3s;
+    }
+
+    .search-bar input:focus {
+      transform: scale(1.05);
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 250px;
+      position: fixed;
+      top: 60px;
+      left: -250px;
+      background: #f6eaff;
+      transition: left 0.5s ease-in-out;
+      padding: 15px;
+      z-index: 9;
+    }
+
+    .sidebar-toggle {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      cursor: pointer;
+      background: #5e2a84;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .sidebar-toggle:hover {
+      background-color: #b56be4;
+    }
+
+    .sidebar-content a {
+      display: block;
+      color: #5e2a84;
+      text-decoration: none;
+      padding: 10px 0;
+      transition: transform 0.3s;
+    }
+
+    .sidebar-content a:hover {
+      transform: scale(1.1);
+    }
+
+    /* Main Content */
+    main {
+      padding: 40px 20px 20px 20px;
+      margin-top: 120px;
+    }
+
+    /* Carousel Animations */
+    .carousel {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+      margin-top: 40px;
+    }
+
+    .carousel-item {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      width: 250px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .carousel-item:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .carousel-item h3 {
+      color: #5e2a84;
+      margin-bottom: 10px;
+    }
+
+    /* Button Animations */
+    button {
+      background: #5e2a84;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 20px;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    button:hover {
+      background: #b56be4;
+      transform: translateY(-5px);
+    }
+
+    .animate-button {
+      animation: bounce 1.5s infinite;
+    }
+
+    /* Keyframe animations */
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #5e2a84;
+      color: white;
+      margin-top: auto;
+    }
+
+    .social-icons img {
+      width: 30px;
+      margin: 0 10px;
+      transition: transform 0.3s;
+    }
+
+    .social-icons img:hover {
+      transform: rotate(10deg) scale(1.1);
+    }
+
+    /* Horizontal Line Above Footer */
+    .footer-line {
+      width: 100%;
+      height: 1px;
+      background-color: #b56be4;
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="logo-container">
+      <h1>Zyrella Jewellery</h1>
+    </div>
+    <nav class="nav-menu" aria-label="Main Navigation">
+      <a href="#home">Home</a>
+      <a href="#collections-carousel">Collections</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="search-bar">
+      <input type="text" placeholder="Search for jewelry..." aria-label="Search Jewelry" />
+    </div>
+  </header>
+
+  <!-- Sidebar -->
+  <aside id="sidebar" class="sidebar" aria-label="User Sidebar">
+    <button class="sidebar-toggle" aria-label="Toggle Sidebar" onclick="toggleSidebar()">☰</button>
+    <div class="sidebar-content">
+      <a href="#wishlist">Wishlist</a>
+      <a href="#profile">Profile</a>
+      <a href="#cart">My Cart</a>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main>
+    <section id="welcome">
+      <h2>Welcome to Zyrella</h2>
+      <p>Discover our handcrafted jewelry collections crafted with love, luxury, and legacy. Each piece is carefully designed to reflect timeless elegance and sophistication.</p>
+    </section>
+
+    <!-- Collections Carousel -->
+    <section id="collections-carousel" aria-label="Jewelry Collections">
+      <div class="carousel">
+        <div class="carousel-item">
+          <h3>Gold Collection</h3>
+          <button class="animate-button" onclick="window.location.href='gold.html'" aria-label="Explore Gold Collection">Explore</button>
+        </div>
+        <div class="carousel-item">
+          <h3>Silver Collection</h3>
+          <button class="animate-button" onclick="window.location.href='silver.html'" aria-label="Explore Silver Collection">Explore</button>
+        </div>
+        <div class="carousel-item">
+          <h3>Diamond Collection</h3>
+          <button class="animate-button" onclick="window.location.href='diamond.html'" aria-label="Explore Diamond Collection">Explore</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Line Above Footer -->
+  <div class="footer-line"></div>
+
+  <!-- Footer -->
+  <footer>
+    <p>Contact: +91-1234567890 | Email: <a href="mailto:support@zyrella.com" aria-label="Email Support">support@zyrella.com</a></p>
+    <div class="social-icons">
+      <a href="#" aria-label="Facebook"><img src="fb-icon.png" alt="Facebook Icon"></a>
+      <a href="#" aria-label="Twitter"><img src="twitter-icon.png" alt="Twitter Icon"></a>
+      <a href="#" aria-label="Instagram"><img src="insta-icon.png" alt="Instagram Icon"></a>
+    </div>
+    <p>&copy; 2025 Zyrella Jewellery</p>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      sidebar.style.left = sidebar.style.left === '0px' ? '-250px' : '0px';
+    }
+
+    // Add fade-in effect for carousel items
+    window.addEventListener('load', () => {
+      const carouselItems = document.querySelectorAll('.carousel-item');
+      carouselItems.forEach((item, index) => {
+        setTimeout(() => {
+          item.style.opacity = '1';
+          item.style.transform = 'translateY(0)';
+        }, index * 200); // Adds a delay for each item
+      });
+    });
+  </script>
+</body>
+</html>
